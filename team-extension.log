@@ -21,3 +21,27 @@
 2018-01-17T17:11:07.859Z - debug:  [33584] TFVC errors (via stderr): Unable to determine the source control server.
 
 2018-01-17T17:11:07.859Z - error:  [33584] Could not find a workspace with mappings (e.g., not a TFVC repository, wrong version of TF is being used). Unable to determine the source control server.
+2018-01-17T17:24:10.610Z - debug:  [33584] Reinitializing due to onDidChangeConfiguration
+2018-01-17T17:24:10.611Z - debug:  [33584] Polling interval value (minutes): 5
+2018-01-17T17:24:10.616Z - info:   [33584] *** FOLDER: c:\GoDev\go-file-counter ***
+2018-01-17T17:24:10.616Z - info:   [33584] VSTSVSCode/1.122.0 (VSCode 1.19.2; Windows_NT 6.1.7601; Node 7.9.0)
+2018-01-17T17:24:10.616Z - debug:  [33584] Looking for an External Context at c:\GoDev\go-file-counter
+2018-01-17T17:24:10.616Z - debug:  [33584] No External Context at c:\GoDev\go-file-counter
+2018-01-17T17:24:10.620Z - debug:  [33584] Looking for TFVC repository at c:\GoDev\go-file-counter
+2018-01-17T17:24:10.621Z - debug:  [33584] TFVC Creating Tfvc object with localPath='undefined'
+2018-01-17T17:24:10.622Z - debug:  [33584] Using TFS proxy: 
+2018-01-17T17:24:10.622Z - debug:  [33584] TFVC Retrieved from settings; localPath='C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\TF.exe'
+2018-01-17T17:24:10.623Z - debug:  [33584] TFVC Repository created with repositoryRootFolder='c:\GoDev\go-file-counter'
+2018-01-17T17:24:10.625Z - debug:  [33584] TFVC Repository.CheckVersion
+2018-01-17T17:24:10.625Z - debug:  [33584] TFVC: tf add -noprompt -?
+2018-01-17T17:24:10.652Z - debug:  [33584] TFVC: spawned new process (duration: 27ms)
+2018-01-17T17:24:10.889Z - debug:  [33584] TFVC: add exit code: 0 (duration: 264ms)
+2018-01-17T17:24:10.889Z - debug:  [33584] TFVC Minimum required version: 14.102.0
+2018-01-17T17:24:10.890Z - debug:  [33584] TFVC (TF.exe, TF.cmd) version: 14.102.25619.0
+2018-01-17T17:24:10.890Z - debug:  [33584] TFVC Repository.FindWorkspace with localPath='c:\GoDev\go-file-counter'
+2018-01-17T17:24:10.890Z - debug:  [33584] TFVC: tf workfold -noprompt c:\GoDev\go-file-counter
+2018-01-17T17:24:10.917Z - debug:  [33584] TFVC: spawned new process (duration: 26ms)
+2018-01-17T17:24:11.050Z - debug:  [33584] TFVC: workfold exit code: 100 (duration: 159ms)
+2018-01-17T17:24:11.050Z - debug:  [33584] TFVC errors (via stderr): Unable to determine the source control server.
+
+2018-01-17T17:24:11.050Z - error:  [33584] Could not find a workspace with mappings (e.g., not a TFVC repository, wrong version of TF is being used). Unable to determine the source control server.
