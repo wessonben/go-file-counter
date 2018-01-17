@@ -8,7 +8,10 @@ import (
 func main() {
 
 	count := 0
-	directory := "C:\\Temp"
+	directory := ""
+
+	fmt.Print("Enter directory: ")
+    fmt.Scanln(&directory)
 
 	fmt.Printf("Counting files in %s\n", directory)
 	countFilesInDirectory(directory, &count)
