@@ -1,0 +1,23 @@
+2018-01-17T17:11:07.285Z - info:   [33584] *** FOLDER: c:\GoDev\go-file-counter ***
+2018-01-17T17:11:07.285Z - info:   [33584] VSTSVSCode/1.122.0 (VSCode 1.19.2; Windows_NT 6.1.7601; Node 7.9.0)
+2018-01-17T17:11:07.286Z - debug:  [33584] Looking for an External Context at c:\GoDev\go-file-counter
+2018-01-17T17:11:07.286Z - debug:  [33584] No External Context at c:\GoDev\go-file-counter
+2018-01-17T17:11:07.290Z - debug:  [33584] Looking for TFVC repository at c:\GoDev\go-file-counter
+2018-01-17T17:11:07.290Z - debug:  [33584] TFVC Creating Tfvc object with localPath='undefined'
+2018-01-17T17:11:07.292Z - debug:  [33584] Using TFS proxy: 
+2018-01-17T17:11:07.292Z - debug:  [33584] TFVC Retrieved from settings; localPath='C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\TF.exe'
+2018-01-17T17:11:07.292Z - debug:  [33584] TFVC Repository created with repositoryRootFolder='c:\GoDev\go-file-counter'
+2018-01-17T17:11:07.294Z - debug:  [33584] TFVC Repository.CheckVersion
+2018-01-17T17:11:07.294Z - debug:  [33584] TFVC: tf add -noprompt -?
+2018-01-17T17:11:07.324Z - debug:  [33584] TFVC: spawned new process (duration: 29ms)
+2018-01-17T17:11:07.351Z - debug:  [33584] TFVC: spawned new process (duration: 26ms)
+2018-01-17T17:11:07.730Z - debug:  [33584] TFVC: add exit code: 0 (duration: 436ms)
+2018-01-17T17:11:07.731Z - debug:  [33584] TFVC Minimum required version: 14.102.0
+2018-01-17T17:11:07.731Z - debug:  [33584] TFVC (TF.exe, TF.cmd) version: 14.102.25619.0
+2018-01-17T17:11:07.731Z - debug:  [33584] TFVC Repository.FindWorkspace with localPath='c:\GoDev\go-file-counter'
+2018-01-17T17:11:07.732Z - debug:  [33584] TFVC: tf workfold -noprompt c:\GoDev\go-file-counter
+2018-01-17T17:11:07.757Z - debug:  [33584] TFVC: spawned new process (duration: 25ms)
+2018-01-17T17:11:07.858Z - debug:  [33584] TFVC: workfold exit code: 100 (duration: 126ms)
+2018-01-17T17:11:07.859Z - debug:  [33584] TFVC errors (via stderr): Unable to determine the source control server.
+
+2018-01-17T17:11:07.859Z - error:  [33584] Could not find a workspace with mappings (e.g., not a TFVC repository, wrong version of TF is being used). Unable to determine the source control server.
