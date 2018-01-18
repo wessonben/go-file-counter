@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"time"
 )
 
 func main() {
@@ -19,11 +20,13 @@ func main() {
 	// verify the directory exists
 	_, err := ioutil.ReadDir(directory)
 	if err == nil {
+		start := time.Now()
 		fmt.Printf("Counting files in %s\n", directory)
 		fileCountChannel := make(chan int)
 		go countFilesInSubDirectory(directory, fileCountChannel)
 		fileCount := <- fileCountChannel
-		fmt.Printf("Found %d files in %s\n", fileCount, directory)
+		elapsed := time.Since(start)
+		fmt.Printf("Found %d files in %s\n", fileCount, elapsed)
 	} else {
 		fmt.Printf("Invalid directory: %s\n", directory)
 	}
