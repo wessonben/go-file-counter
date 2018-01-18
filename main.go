@@ -9,10 +9,10 @@ import (
 func main() {
 
 	directory := ""
-	
+
 	fmt.Print("Enter directory or leave blank for C:\\Temp: ")
 	fmt.Scanln(&directory)
-	
+
 	if directory == "" {
 		directory = "C:\\Temp"
 	}
@@ -24,7 +24,7 @@ func main() {
 		fmt.Printf("Counting files in %s\n", directory)
 		fileCountChannel := make(chan int)
 		go countFilesInSubDirectory(directory, fileCountChannel)
-		fileCount := <- fileCountChannel
+		fileCount := <-fileCountChannel
 		elapsed := time.Since(start)
 		fmt.Printf("Found %d files in %s\n", fileCount, elapsed)
 	} else {
@@ -32,40 +32,46 @@ func main() {
 	}
 }
 
+//-----------------------------------------------------------------------------
+// Function to count the files in a directory and all sub-directories using
+// recursion. Demonstrates concurrent go routines and channel synchronisation.
+//-----------------------------------------------------------------------------
 func countFilesInSubDirectory(directory string, parentChannel chan int) {
-	
-	fileCount := 0
-	directoryCount := 0
+
 	localChannel := make(chan int)
-
-	files, _ := ioutil.ReadDir(directory)
-
-	// Get the number of sub-directories and files in the current directory.
-	// Need to know the number of directories in advance of launching the
-	// recursive go-routine so that we know how many messages to wait for on 
-	// the file count channel
-	for _, file := range files {
-		if file.IsDir() {
-			directoryCount++
-		} else {
-			fileCount++
-		}
-	}
+	directories, files := getDirectoryItems(directory)
+	fileCount := len(files)
 
 	// Now process the sub-directories as new go-routines
-	for _, file := range files {
-		if file.IsDir() {
-			subDirectory := directory + "\\" + file.Name()
-			fmt.Printf("Found directory %s\n", subDirectory)
-			go countFilesInSubDirectory(subDirectory, localChannel)
-		}
+	for _, name := range directories {
+		subDirectory := directory + "\\" + name
+		fmt.Printf("Found directory %s\n", subDirectory)
+		go countFilesInSubDirectory(subDirectory, localChannel)
 	}
 
 	// Wait for all the file count messages
-	for i := 1; i <= directoryCount; i++ {
-        fileCount += <- localChannel
+	for i := 0; i < len(directories); i++ {
+		fileCount += <-localChannel
 	}
-	
+
 	// Send total file count up to the parent routine
 	parentChannel <- fileCount
+}
+
+//-----------------------------------------------------------------------------
+// Function to return the list of sub-directories and files within a directory.
+// Demonstrates returning multiple values and adding items to a slice.
+//-----------------------------------------------------------------------------
+func getDirectoryItems(path string) ([]string, []string) {
+	directories := make([]string, 0)
+	files := make([]string, 0)
+	fileInfos, _ := ioutil.ReadDir(path)
+	for _, fileInfo := range fileInfos {
+		if fileInfo.IsDir() {
+			directories = append(directories, fileInfo.Name())
+		} else {
+			files = append(files, fileInfo.Name())
+		}
+	}
+	return directories, files
 }
