@@ -9,7 +9,6 @@ func main() {
 
 	directory := ""
 	
-
 	fmt.Print("Enter directory or leave blank for C:\\Temp: ")
 	fmt.Scanln(&directory)
 	
@@ -17,12 +16,12 @@ func main() {
 		directory = "C:\\Temp"
 	}
 
+	// verify the directory exists
 	_, err := ioutil.ReadDir(directory)
-	
 	if err == nil {
 		fmt.Printf("Counting files in %s\n", directory)
 		fileCountChannel := make(chan int)
-		go countFilesInFirstDirectory(directory, fileCountChannel)
+		go countFilesInSubDirectory(directory, fileCountChannel)
 		fileCount := <- fileCountChannel
 		fmt.Printf("Found %d files in %s\n", fileCount, directory)
 	} else {
@@ -30,33 +29,40 @@ func main() {
 	}
 }
 
-func countFilesInFirstDirectory(directory string, fileCountChannel chan int) {
+func countFilesInSubDirectory(directory string, parentChannel chan int) {
+	
+	fileCount := 0
+	directoryCount := 0
+	localChannel := make(chan int)
 
-	count := 0
 	files, _ := ioutil.ReadDir(directory)
 
+	// Get the number of sub-directories and files in the current directory.
+	// Need to know the number of directories in advance of launching the
+	// recursive go-routine so that we know how many messages to wait for on 
+	// the file count channel
+	for _, file := range files {
+		if file.IsDir() {
+			directoryCount++
+		} else {
+			fileCount++
+		}
+	}
+
+	// Now process the sub-directories as new go-routines
 	for _, file := range files {
 		if file.IsDir() {
 			subDirectory := directory + "\\" + file.Name()
 			fmt.Printf("Found directory %s\n", subDirectory)
-			countFilesInSubDirectory(subDirectory, &count)
-		} else {
-			count++
+			go countFilesInSubDirectory(subDirectory, localChannel)
 		}
 	}
 
-	fileCountChannel <- count
-}
-
-func countFilesInSubDirectory(directory string, count *int) {
-	files, _ := ioutil.ReadDir(directory)
-	for _, file := range files {
-		if file.IsDir() {
-			subDirectory := directory + "\\" + file.Name()
-			fmt.Printf("Found directory %s\n", subDirectory)
-			countFilesInSubDirectory(subDirectory, count)
-		} else {
-			*count++
-		}
+	// Wait for all the file count messages
+	for i := 1; i <= directoryCount; i++ {
+        fileCount += <- localChannel
 	}
+	
+	// Send total file count up to the parent routine
+	parentChannel <- fileCount
 }
