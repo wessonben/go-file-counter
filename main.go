@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"time"
 
-	fc "./filecounter"
+	fc "go-file-counter/filecounter"
 )
 
 func main() {
